@@ -1,52 +1,31 @@
-Feature: Login
+ Feature: My validations on TestMeApp Application
+  Scenario Outline: login with different credentials
+    Given enter valid username "<uname>"
+    And enter valid password "<pswrd>"
+    Then click on login button
+    And verify login process
 
-In order to login to TestMeApp 
-As a user 
-I need to register first
+    Examples: 
+      | uname   | pswrd       |
+      | lalitha | Password123 |
 
-Business Rules:
- - Only registered user can do the login
- 
- Background:
- Given Alex is on the login page
+  
+  Scenario: Searching and purchasing of the product
+    Given user enters the product name
+    Then user clicks on add to cart
+    And clicks on cart link
+    Then clicks on checkout button
+    And clicks on proceed to pay
+    Then selects the bank and clicks on continue button
+    And enters username and password of bank
+    Then clicks on login button
+    Then enter transaction password
+    And click on paynow button
+    Then verifies the payment process
 
- Scenario: The one where user login successfully
- When  Alex enters correct credentials
- Then  Alex can do successful login
- 
- 
- @datadriven
- Scenario Outline: The one where user logins with multiple credentials
- When  Alex enters username "<username>"
- And   Alex enters password "<password>"
- And   Alex click on login
- Then  Alex can do successful login
- Examples:
- |username  |password   |
- |Lalitha   |Password123|
- |Abhishek29|Password456|
- 
- @verifyproducts
- Scenario: The one where user selects different products through search functionality
- When user searches the below product:
- |Headphone|
- |Travel   |
- |Laptop   |
- Then available products should be added to cart
- 
- 
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  
+  Scenario: The one where the user moves to the cart without adding any item in it
+    Given user has registered into TestMeApp
+    When user search a particular product like headphones
+    And try to proceed to payment without adding any item in the cart
+    Then TestMeApp does not display the cart icon
